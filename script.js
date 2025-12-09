@@ -312,5 +312,83 @@
             });
         }
     });
+
+    // ============================================
+    // EMAILJS INTEGRATION
+    // ============================================
+
+    // Initialize EmailJS with your Public Key
+    // IMPORTANT: Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
+    emailjs.init('Mfq5kN55ctRpCJ72p');
+
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get original button text
+            const originalBtnText = submitBtn.innerHTML;
+
+            // Show loading state
+            submitBtn.innerHTML = 'Sending... <i class="ph ph-spinner"></i>';
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+
+            // Prepare template parameters
+            const templateParams = {
+                from_name: document.getElementById('name').value,
+                from_email: document.getElementById('email').value,
+                project_type: document.getElementById('project-type').value,
+                budget: document.getElementById('budget').value,
+                message: document.getElementById('message').value,
+            };
+
+            // Send email using EmailJS
+            // IMPORTANT: Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual values
+            emailjs.send('service_qpm3fhe', 'template_ls5eyos', templateParams)
+                .then(function (response) {
+                    console.log('SUCCESS!', response.status, response.text);
+
+                    // Show success message
+                    submitBtn.innerHTML = 'Sent Successfully! <i class="ph ph-check-circle"></i>';
+                    submitBtn.style.background = 'rgba(34, 197, 94, 0.2)';
+                    submitBtn.style.borderColor = 'rgba(34, 197, 94, 0.5)';
+
+                    // Reset form
+                    contactForm.reset();
+
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '1';
+                        submitBtn.style.background = '';
+                        submitBtn.style.borderColor = '';
+                    }, 3000);
+
+                }, function (error) {
+                    console.log('FAILED...', error);
+                    console.log('Error Status:', error.status);
+                    console.log('Error Text:', error.text);
+                    alert('Error: ' + JSON.stringify(error));
+
+                    // Show error message
+                    submitBtn.innerHTML = 'Failed! Try Again <i class="ph ph-x-circle"></i>';
+                    submitBtn.style.background = 'rgba(239, 68, 68, 0.2)';
+                    submitBtn.style.borderColor = 'rgba(239, 68, 68, 0.5)';
+
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '1';
+                        submitBtn.style.background = '';
+                        submitBtn.style.borderColor = '';
+                    }, 3000);
+                });
+        });
+    }
 });
 

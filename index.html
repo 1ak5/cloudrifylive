@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 
 <body>
@@ -123,7 +125,7 @@
     <section id="projects" class="projects">
         <div class="project-feature">
             <img src="project-3.png" alt="About highlight image">
-            <div class="center-pill">About Me</div>
+            <a href="#about" class="center-pill" style="text-decoration: none; cursor: pointer;">About Us</a>
         </div>
         <div class="project-grid">
             <div class="project-column column-left">
@@ -172,14 +174,11 @@
             </div>
 
             <div class="project-column column-center">
-                <div class="project-card hero-card">
-                    <img src="project-3.png" alt="Profile highlight">
-                    <a href="#about" class="center-pill" style="text-decoration: none; cursor: pointer;">About us</a>
-                </div>
+
                 <div class="project-card tall">
                     <img src="project-4.png" alt="Minimal product concept">
                     <div class="project-info">
-                        <div class="close-project-info"></div>
+                        <div class="close-project-info">x</div>
                         <h3 class="project-title">Minimal Concept</h3>
                         <p class="project-description">Minimalist design approach focused on simplicity and
                             functionality. Clean aesthetics meet user-centric design principles.</p>
@@ -714,42 +713,43 @@
                     <a href="#" class="social-pill"><i class="ph ph-globe"></i> Website</a>
                 </div>
             </div>
-            <form class="contact-form">
+            <form class="contact-form" id="contact-form">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" placeholder="John Doe">
+                    <input type="text" id="name" name="from_name" placeholder="John Doe" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="you@example.com">
+                    <input type="email" id="email" name="from_email" placeholder="you@example.com" required>
                 </div>
                 <div class="form-group">
                     <label for="project-type">What do you want to build?</label>
-                    <select id="project-type">
+                    <select id="project-type" name="project_type" required>
                         <option value="">Select project type</option>
-                        <option value="ecommerce">E-commerce Website</option>
-                        <option value="landing-page">Landing Page</option>
-                        <option value="portfolio">Portfolio Website</option>
-                        <option value="business-website">Business Website</option>
-                        <option value="booking-platform">Booking Platform</option>
-                        <option value="app">Mobile/Web App</option>
+                        <option value="E-commerce Website">E-commerce Website</option>
+                        <option value="Landing Page">Landing Page</option>
+                        <option value="Portfolio Website">Portfolio Website</option>
+                        <option value="Business Website">Business Website</option>
+                        <option value="Booking Platform">Booking Platform</option>
+                        <option value="Mobile/Web App">Mobile/Web App</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="budget">Budget Range</label>
-                    <select id="budget">
-                        <option>Under $5k</option>
-                        <option>$5k - $10k</option>
-                        <option>$10k - $25k</option>
-                        <option>$25k+</option>
+                    <select id="budget" name="budget">
+                        <option value="Under $5k">Under $5k</option>
+                        <option value="$5k - $10k">$5k - $10k</option>
+                        <option value="$10k - $25k">$10k - $25k</option>
+                        <option value="$25k+">$25k+</option>
                     </select>
                 </div>
                 <div class="form-group full">
                     <label for="message">Project Details</label>
-                    <textarea id="message" rows="4"
-                        placeholder="Tell me about the goals, timeline, and deliverables you have in mind."></textarea>
+                    <textarea id="message" name="message" rows="4"
+                        placeholder="Tell me about the goals, timeline, and deliverables you have in mind."
+                        required></textarea>
                 </div>
-                <button type="submit" class="btn-outline send-btn">Send Brief <i
+                <button type="submit" class="btn-outline send-btn" id="submit-btn">Send Brief <i
                         class="ph ph-paper-plane-tilt"></i></button>
             </form>
         </div>
