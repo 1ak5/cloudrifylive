@@ -170,11 +170,15 @@ section {
     }
 
     .project-card,
-    .project-card.tall,
-    .project-card.hero-card {
+    .project-card.tall {
         height: 200px;
         border-radius: 10px;
         width: 100%;
+    }
+
+    /* Hide About Us hero-card on mobile */
+    .project-card.hero-card {
+        display: none;
     }
 
     .center-pill {
